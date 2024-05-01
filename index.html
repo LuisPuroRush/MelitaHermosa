@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para ella ❤️</title>
+<style>
+  body {
+    background-image: url('Fondo.gif');
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  #melitaButton {
+    background-color: #ff69b4;
+    color: white;
+    font-size: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  #imageContainer {
+    position: relative;
+    width: 70%;
+    margin-top: 20px;
+    display: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  #mainImage {
+    max-width: 40%;
+    display: none;
+  }
+
+  #contentContainer {
+    width: 50%;
+    padding: 20px;
+    background-color: rgba(255, 192, 203, 0.5);
+    border-radius: 10px;
+    box-sizing: border-box;
+    display: none;
+  }
+
+  #textContainer {
+    text-align: left;
+  }
+
+  #phrase {
+    color: white;
+    font-size: 18px;
+    font-family: 'Times New Roman', Times, serif;
+    margin-top: 10px;
+  }
+
+  .arrowButton {
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    color: black;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+  }
+
+  #prevButton {
+    left: -10%;
+  }
+
+  #nextButton {
+    right: -10%;
+  }
+</style>
+</head>
+<body>
+<button id="melitaButton" onclick="playSong()">Presiona melita :3</button>
+<div id="imageContainer">
+  <button id="prevButton" class="arrowButton" onclick="prevImage()">&lt;</button>
+  <button id="nextButton" class="arrowButton" onclick="nextImage()">&gt;</button>
+  <div id="contentContainer">
+    <div id="textContainer">
+      <p id="phrase"></p>
+    </div>
+  </div>
+  <img id="mainImage" src="" alt="">
+</div>
+<audio id="myAudio">
+  <source src="Musica.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+<script>
+  let currentIndex = 0;
+  const images = ['https://i.pinimg.com/originals/84/53/6e/84536ea88ad82992afb6e879bd7616c2.gif', 'https://i.pinimg.com/originals/dc/49/98/dc499841254b3ba4264dc18aa80d8c39.gif', 'Melani.jpg'];
+  const phrases = ['MELITAAA!! USTED ES MUY BONITA DEJE DE ESTAR ASÍ... YO LE QUIERO :3 XD', 'LUIS QUIERE MUCHO A MELITA Y QUIERE QUE ESTE BIEN', 'MELITA ES HERMOSA💖BELLA, INTELIGENTE Y WENO NO ESTE ASI SI? JUGUEMOS ALGO :3'];
+  const melitaButton = document.getElementById('melitaButton');
+  const imageContainer = document.getElementById('imageContainer');
+  const mainImage = document.getElementById('mainImage');
+  const contentContainer = document.getElementById('contentContainer');
+  const phraseElement = document.getElementById('phrase');
+  const prevButton = document.getElementById('prevButton');
+  const nextButton = document.getElementById('nextButton');
+  const audio = document.getElementById('myAudio');
+
+  function playSong() {
+    melitaButton.style.display = 'none';
+    audio.play();
+    imageContainer.style.display = 'flex';
+    contentContainer.style.display = 'block';
+    showContent();
+  }
+
+  function showContent() {
+    mainImage.src = images[currentIndex];
+    phraseElement.textContent = phrases[currentIndex];
+    mainImage.style.display = 'block';
+    phraseElement.style.display = 'block';
+    prevButton.style.display = 'inline-block';
+    nextButton.style.display = 'inline-block';
+  }
+
+  function prevImage() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    showContent();
+  }
+
+  function nextImage() {
+    currentIndex = (currentIndex + 1) % images.length;
+    showContent();
+  }
+
+  audio.onended = function() {
+    showContent();
+  };
+</script>
+</body>
+</html>
